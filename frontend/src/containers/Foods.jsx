@@ -65,6 +65,10 @@ export const Foods = ({ restaurantsId }) => {
   const [state, setState] = useState(initialState);
 
   const hasFetched = useRef(false);
+  const submitOrder = () => {
+    // 後ほど仮注文のAPIを実装します
+    console.log('登録ボタンが押された！')
+  }
 
   useEffect(() => {
     if (hasFetched.current) return;
@@ -129,9 +133,23 @@ export const Foods = ({ restaurantsId }) => {
           <FoodOrderDialog
             food={state.selectedFood}
             isOpen={state.isOpenOrderDialog}
+            countNumber={state.selectedFoodCount}
+            onClickCountUp={() => setState({
+              ...state,
+              selectedFoodCount: state.selectedFoodCount + 1,
+            })}
+            onClickCountDown={() => setState({
+              ...state,
+              selectedFoodCount: state.selectedFoodCount - 1,
+            })}
+            // 先ほど作った関数を渡します
+            onClickOrder={() => submitOrder()}
+            // モーダルを閉じる時はすべてのstateを初期化する
             onClose={() => setState({
               ...state,
               isOpenOrderDialog: false,
+              selectedFood: null,
+              selectedFoodCount: 1,
             })}
           />
       }
