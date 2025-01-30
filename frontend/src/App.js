@@ -4,6 +4,7 @@ import {
   Routes,
   Route,
   useParams,
+  Navigate
 } from "react-router";
 
 // components
@@ -20,6 +21,8 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+        {/* トップページにアクセスした際に /restaurants へリダイレクト */}
+        <Route path="/" element={<Navigate to="/restaurants" />} />
         {/* 店舗一覧ページ */}
         <Route path="/restaurants" element={<Restaurants />} />
         {/* フード一覧ページ */}
